@@ -6,34 +6,36 @@
         mounted = true;
     });
 
-    const links = [{ label: 'GitHub', href: 'https://github.com/jackra1n' }];
+    const links = [
+        { label: 'GitHub', href: 'https://github.com/jackra1n', icon: 'i-simple-icons:github' },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jacek-lajdecki/', icon: 'i-simple-icons:linkedin' }
+    ];
 
-    const skillsPrimary = ['Java', 'JSF', 'PrimeFaces', 'Maven', 'Docker'];
-    const skillsSecondary = ['Rust', 'Python', 'Linux', 'Homelab', 'Svelte'];
+    const skillsPrimary = ['Rust', 'Python', 'Svelte', 'Docker', 'Linux'];
 
     const showcase = [
         {
-            title: 'Homelab',
+            title: 'Infra',
             icon: 'i-lucide:server',
             hint: 'Docker + IaC',
             href: 'https://github.com/jackra1n/infra'
         },
         {
-            title: 'Rust',
-            icon: 'i-simple-icons:rust',
-            hint: 'Fast tools & CLIs',
+            title: 'CLIs',
+            icon: 'i-lucide:terminal',
+            hint: 'Fast tools',
             href: undefined
         },
         {
-            title: 'Python',
-            icon: 'i-simple-icons:python',
-            hint: 'Automation & tooling',
+            title: 'Automation',
+            icon: 'i-lucide:cog',
+            hint: 'Cut manual work',
             href: undefined
         },
         {
-            title: 'Svelte',
-            icon: 'i-simple-icons:svelte',
-            hint: 'Minimal UIs',
+            title: 'UI',
+            icon: 'i-lucide:layout-template',
+            hint: 'Minimal interfaces',
             href: undefined
         }
     ];
@@ -50,8 +52,8 @@
         <a href="/" class="text-xl md:text-2xl font-semibold tracking-tight">jackra1n</a>
         <nav class="flex items-center gap-5 text-sm text-neutral-300">
             {#each links as link}
-                <a class="inline-flex items-center gap-2 hover:text-white transition-colors" href={link.href} target="_blank" rel="noreferrer">
-                    <span class="i-simple-icons:github h-4 w-4" aria-hidden="true"></span>
+                <a class="inline-flex items-center gap-2 hover:text-white transition-colors" href={link.href} target="_blank" rel="noreferrer" aria-label={link.label}>
+                    <span class={`${link.icon} h-4 w-4`} aria-hidden="true"></span>
                     <span>{link.label}</span>
                 </a>
             {/each}
@@ -61,25 +63,25 @@
     <section class="mt-20 grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]">
         <div class={`transition-all duration-700 ease-out delay-100 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
             <h1 class="text-4xl md:text-6xl font-semibold leading-[1.05]">
-                Computer science student and builder.
+                Computer science student and <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400">builder</span>.
             </h1>
             <p class="mt-5 text-neutral-300 max-w-2xl">
-                I solve problems with code and ship pragmatic systems. Trained through an apprenticeship in Switzerland, professional experience in enterprise Java, and currently wrapping up my B.Sc. at HSLU. I enjoy backend work, infrastructure, and squeezing the most out of minimal UIs.
+                I solve problems with code and ship solid things. Trained in Switzerland, experience with enterprise Java, and finishing my B.Sc. at HSLU. I like backend, infrastructure, and minimal UIs.
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
                 {#each skillsPrimary as s}
                     <span class="rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-sm text-neutral-200">{s}</span>
                 {/each}
             </div>
-            <div class="mt-3 flex flex-wrap gap-3">
-                {#each skillsSecondary as s}
-                    <span class="rounded-full border border-neutral-800/80 bg-neutral-900/40 px-3 py-1 text-sm text-neutral-300">{s}</span>
-                {/each}
-            </div>
+            
             <div class="mt-10 flex gap-4">
                 <a href="https://github.com/jackra1n" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors">
                     <span class="i-simple-icons:github h-4 w-4" aria-hidden="true"></span>
                     View GitHub
+                </a>
+                <a href="mailto:hi@jackra1n.com" class="inline-flex items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white hover:border-white/20 transition-colors">
+                    <span class="i-lucide:mail h-4 w-4" aria-hidden="true"></span>
+                    Email
                 </a>
             </div>
         </div>
@@ -101,7 +103,9 @@
                         </div>
                         <div class="relative z-10">
                             <div class="text-sm font-medium">{item.title}</div>
-                            <div class="text-xs text-neutral-400">{item.hint}</div>
+                            {#if item.hint}
+                                <div class="text-xs text-neutral-400">{item.hint}</div>
+                            {/if}
                         </div>
                     </a>
                 {/each}
@@ -109,42 +113,23 @@
         </div>
     </section>
 
-    <!-- About + stack -->
+    <!-- About + work -->
     <section class={`mt-24 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
             <h3 class="text-lg font-medium">About</h3>
-            <p class="mt-2 text-sm text-neutral-300">Apprenticeship-trained developer, now finishing B.Sc. at HSLU. I value clarity, reliability, and minimal design. Outside of code I lift — bodybuilding keeps my routine and discipline sharp.</p>
+            <p class="mt-2 text-sm text-neutral-300">Trained in Switzerland, finishing a B.Sc. at HSLU. I value clarity, reliability and minimal design. Outside code I lift; bodybuilding keeps the routine sharp.</p>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(16,185,129,0.25)]">
-            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:server h-5 w-5"></span>Homelab</h3>
-            <p class="mt-2 text-sm text-neutral-300">I run a small server with Docker and IaC for personal services.</p>
-            <a class="mt-3 inline-flex items-center gap-1 text-sm text-indigo-300 hover:text-indigo-200" href="https://github.com/jackra1n/infra" target="_blank" rel="noreferrer"><span>Explore infra</span><span class="i-lucide:arrow-right h-4 w-4"></span></a>
+            <h3 class="text-lg font-medium">What I work with</h3>
+            <p class="mt-2 text-sm text-neutral-300">Enterprise Java (JSF/PrimeFaces, Maven) and Docker in production.</p>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.25)]">
-            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:code-2 h-5 w-5"></span>Building</h3>
-            <p class="mt-2 text-sm text-neutral-300">Minimal tools and clean code. Recently more Rust for fast utilities.</p>
+            <h3 class="text-lg font-medium">Currently</h3>
+            <p class="mt-2 text-sm text-neutral-300">Final year of the B.Sc. at HSLU, building and iterating on side projects.</p>
         </div>
     </section>
 
-    <!-- Then what I do professionally -->
-    <section class={`mt-10 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
-            <h3 class="text-lg font-medium">What I work with</h3>
-            <p class="mt-2 text-sm text-neutral-300">Enterprise Java at work (JSF/PrimeFaces, Maven), Docker across projects, and Linux everywhere.</p>
-        </div>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(16,185,129,0.25)]">
-            <h3 class="text-lg font-medium">Currently</h3>
-            <p class="mt-2 text-sm text-neutral-300">Two years into B.Sc. at HSLU, one to go. Building things alongside.</p>
-        </div>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.25)]">
-            <h3 class="text-lg font-medium">Tech I like</h3>
-            <div class="mt-3 flex flex-wrap gap-2">
-                {#each ['Rust', 'Python', 'Docker', 'Linux', 'Svelte'] as t}
-                    <span class="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-neutral-200 transition-colors hover:bg-white/8">{t}</span>
-                {/each}
-            </div>
-        </div>
-    </section>
+    <!-- Space intentionally left for future projects or posts -->
 
     <footer class={`mt-24 flex items-center justify-between border-t border-white/5 pt-8 text-xs text-neutral-400 transition-all duration-700 ease-out delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <span>© {new Date().getFullYear()} jackra1n</span>
