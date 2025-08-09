@@ -1,3 +1,3 @@
-# jackra1n.github.io
+# My personal website
 
-This is just my website. Don't worry about it.
+My personal website to show what I'm doing.
