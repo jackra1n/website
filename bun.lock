@@ -4,14 +4,16 @@
     "": {
       "name": "jackra1n.github.io",
       "devDependencies": {
-        "@sveltejs/adapter-static": "latest",
-        "@sveltejs/kit": "latest",
-        "@sveltejs/vite-plugin-svelte": "latest",
-        "svelte": "latest",
-        "svelte-check": "latest",
-        "typescript": "latest",
-        "unocss": "latest",
-        "vite": "latest",
+        "@iconify-json/lucide": "^1.2.61",
+        "@iconify-json/simple-icons": "^1.2.46",
+        "@sveltejs/adapter-static": "^3.0.9",
+        "@sveltejs/kit": "^2.27.3",
+        "@sveltejs/vite-plugin-svelte": "^6.1.1",
+        "svelte": "^5.38.0",
+        "svelte-check": "^4.3.1",
+        "typescript": "^5.9.2",
+        "unocss": "^66.4.2",
+        "vite": "^7.1.1",
       },
     },
   },
@@ -91,6 +93,10 @@
     "@esbuild/win32-ia32": ["@esbuild/win32-ia32@0.25.8", "", { "os": "win32", "cpu": "ia32" }, "sha512-hiGgGC6KZ5LZz58OL/+qVVoZiuZlUYlYHNAmczOm7bs2oE1XriPFi5ZHHrS8ACpV5EjySrnoCKmcbQMN+ojnHg=="],
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.25.8", "", { "os": "win32", "cpu": "x64" }, "sha512-cn3Yr7+OaaZq1c+2pe+8yxC8E144SReCQjN6/2ynubzYjvyqZjTXfQJpAcQpsdJq3My7XADANiYGHoFC69pLQw=="],
+
+    "@iconify-json/lucide": ["@iconify-json/lucide@1.2.61", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-0sLmi3vyEsJ6XL/uhl0a+uphdYIW1viYkUmiuT4SK3e2R3o3GIWY9k8N+SZL++GVBbMKy9oatx8KrzyoPZ6WqQ=="],
+
+    "@iconify-json/simple-icons": ["@iconify-json/simple-icons@1.2.46", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-MJfKQDhOMQD5Fc8PcTtCdFX0oBf/nKVfp69ScdEKIXW0JXELX5V2Ld45EsjShi8aJ6DNhdDtSDZvKuDnkDiKnw=="],
 
     "@iconify/types": ["@iconify/types@2.0.0", "", {}, "sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg=="],
 

@@ -7,25 +7,25 @@
     const showcase = [
         {
             title: 'Motorcycle',
-            icon: 'i-lucide-bike',
+            icon: 'i-lucide:bike',
             hint: 'A ride clears the cache',
             href: undefined
         },
         {
             title: 'Homelab',
-            icon: 'i-lucide-server',
+            icon: 'i-lucide:server',
             hint: 'Docker containers everywhere',
             href: 'https://github.com/jackra1n/infra'
         },
         {
             title: 'Rust',
-            icon: 'i-lucide-cog',
+            icon: 'i-lucide:cog',
             hint: 'Fast tools and CLIs',
             href: undefined
         },
         {
             title: 'Python',
-            icon: 'i-lucide-terminal',
+            icon: 'i-lucide:terminal',
             hint: 'Data + scripting',
             href: undefined
         }
@@ -44,7 +44,7 @@
         <nav class="flex items-center gap-5 text-sm text-neutral-300">
             {#each links as link}
                 <a class="inline-flex items-center gap-2 hover:text-white transition-colors" href={link.href} target="_blank" rel="noreferrer">
-                    <span class="i-lucide-github h-4 w-4" aria-hidden="true"></span>
+                    <span class="i-simple-icons:github h-4 w-4" aria-hidden="true"></span>
                     <span>{link.label}</span>
                 </a>
             {/each}
@@ -71,7 +71,7 @@
             </div>
             <div class="mt-10 flex gap-4">
                 <a href="https://github.com/jackra1n" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors">
-                    <span class="i-lucide-github h-4 w-4" aria-hidden="true"></span>
+                    <span class="i-simple-icons:github h-4 w-4" aria-hidden="true"></span>
                     View GitHub
                 </a>
                 <a href="/blog" class="inline-flex items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white hover:border-white/20 transition-colors">Blog</a>
@@ -106,16 +106,16 @@
     <!-- Interests first -->
     <section class="mt-24 grid gap-6 md:grid-cols-3">
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
-            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide-bike h-5 w-5"></span>Motorcycles</h3>
+            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:bike h-5 w-5"></span>Motorcycles</h3>
             <p class="mt-2 text-sm text-neutral-300">Riding keeps me focused and present. Road, weather, line—no distractions.</p>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(16,185,129,0.25)]">
-            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide-server h-5 w-5"></span>Homelab</h3>
+            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:server h-5 w-5"></span>Homelab</h3>
             <p class="mt-2 text-sm text-neutral-300">Small server, many services. Docker, IaC, and lots of logs.</p>
-            <a class="mt-3 inline-flex items-center gap-1 text-sm text-indigo-300 hover:text-indigo-200" href="https://github.com/jackra1n/infra" target="_blank" rel="noreferrer"><span>Explore infra</span><span class="i-lucide-arrow-right h-4 w-4"></span></a>
+            <a class="mt-3 inline-flex items-center gap-1 text-sm text-indigo-300 hover:text-indigo-200" href="https://github.com/jackra1n/infra" target="_blank" rel="noreferrer"><span>Explore infra</span><span class="i-lucide:arrow-right h-4 w-4"></span></a>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.25)]">
-            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide-code-2 h-5 w-5"></span>Building</h3>
+            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:code-2 h-5 w-5"></span>Building</h3>
             <p class="mt-2 text-sm text-neutral-300">Minimal tools and clean code. Lately: Rust for fast utilities.</p>
         </div>
     </section>

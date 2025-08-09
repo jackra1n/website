@@ -12,7 +12,9 @@ export default defineConfig({
     presets: [
         presetWind4(),
         presetTypography(),
-        presetIcons(),
+        presetIcons({
+            warn: true,
+        }),
         presetWebFonts({
             provider: 'google',
             fonts: {
