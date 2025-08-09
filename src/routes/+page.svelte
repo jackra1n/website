@@ -74,7 +74,6 @@
                     <span class="i-simple-icons:github h-4 w-4" aria-hidden="true"></span>
                     View GitHub
                 </a>
-                <a href="/blog" class="inline-flex items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white hover:border-white/20 transition-colors">Blog</a>
             </div>
         </div>
 
