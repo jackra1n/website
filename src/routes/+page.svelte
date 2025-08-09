@@ -155,7 +155,7 @@
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.25)]">
             <h3 class="text-lg font-medium">Currently</h3>
-            <p class="mt-2 text-sm text-neutral-300">Final year of the B.Sc. at HSLU, building and iterating on side projects.</p>
+            <p class="mt-2 text-sm text-neutral-300">Final year of the B.Sc. at HSLU. Getting better at Rust and frontend with Svelte, while shipping small tools.</p>
         </div>
     </section>
 
