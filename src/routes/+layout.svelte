@@ -1,13 +1,11 @@
 <script lang="ts">
     import '@unocss/reset/tailwind.css';
     import 'virtual:uno.css';
-    import favicon from '$lib/assets/favicon.svg';
 
     let { children } = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
