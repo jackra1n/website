@@ -1,15 +1,34 @@
 <script lang="ts">
-    const links = [
-        { label: 'GitHub', href: 'https://github.com/jackra1n' },
-        { label: 'Infra (Homelab)', href: 'https://github.com/jackra1n/infra' }
-    ];
+    const links = [{ label: 'GitHub', href: 'https://github.com/jackra1n' }];
 
-    const skillsPrimary = [
-        'Java', 'JSF', 'PrimeFaces', 'Maven', 'Docker'
-    ];
+    const skillsPrimary = ['Java', 'JSF', 'PrimeFaces', 'Maven', 'Docker'];
+    const skillsSecondary = ['Python', 'Rust', 'Svelte', 'Linux', 'Homelab'];
 
-    const skillsSecondary = [
-        'Python', 'Rust', 'Svelte', 'Linux', 'Homelab'
+    const showcase = [
+        {
+            title: 'Motorcycle',
+            icon: 'i-lucide-bike',
+            hint: 'A ride clears the cache',
+            href: undefined
+        },
+        {
+            title: 'Homelab',
+            icon: 'i-lucide-server',
+            hint: 'Docker containers everywhere',
+            href: 'https://github.com/jackra1n/infra'
+        },
+        {
+            title: 'Rust',
+            icon: 'i-lucide-cog',
+            hint: 'Fast tools and CLIs',
+            href: undefined
+        },
+        {
+            title: 'Python',
+            icon: 'i-lucide-terminal',
+            hint: 'Data + scripting',
+            href: undefined
+        }
     ];
 </script>
 
@@ -22,9 +41,12 @@
 <main class="container mx-auto px-5 md:px-8 py-20">
     <header class="flex items-center justify-between">
         <a href="/" class="text-xl md:text-2xl font-semibold tracking-tight">jackra1n</a>
-        <nav class="flex gap-5 text-sm text-neutral-300">
+        <nav class="flex items-center gap-5 text-sm text-neutral-300">
             {#each links as link}
-                <a class="hover:text-white transition-colors" href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+                <a class="inline-flex items-center gap-2 hover:text-white transition-colors" href={link.href} target="_blank" rel="noreferrer">
+                    <span class="i-lucide-github h-4 w-4" aria-hidden="true"></span>
+                    <span>{link.label}</span>
+                </a>
             {/each}
         </nav>
     </header>
@@ -48,39 +70,73 @@
                 {/each}
             </div>
             <div class="mt-10 flex gap-4">
-                <a href="https://github.com/jackra1n" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors">View GitHub</a>
+                <a href="https://github.com/jackra1n" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors">
+                    <span class="i-lucide-github h-4 w-4" aria-hidden="true"></span>
+                    View GitHub
+                </a>
                 <a href="/blog" class="inline-flex items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white hover:border-white/20 transition-colors">Blog</a>
             </div>
         </div>
 
-        <!-- Minimal animated character: a line-drawn motorcycle that idles and leans on hover -->
+        <!-- Showcase grid (icons/images placeholders with glow + float on hover) -->
         <div class="relative mx-auto w-full max-w-md select-none">
-            <svg viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg" class="mx-auto h-auto w-full drop-shadow-[0_0_40px_rgba(99,102,241,0.15)]">
-                <g class="origin-center animate-[idle_3s_ease-in-out_infinite]">
-                    <circle cx="60" cy="90" r="22" class="fill-none stroke-white/70" stroke-width="2" />
-                    <circle cx="160" cy="90" r="22" class="fill-none stroke-white/70" stroke-width="2" />
-                    <path d="M60 68 L85 55 L105 55 L120 68 L160 68" class="fill-none stroke-white/80" stroke-width="2.5" />
-                    <path d="M105 55 L110 40 L130 40" class="fill-none stroke-white/70" stroke-width="2" />
-                    <circle cx="110" cy="40" r="3" class="fill-white/80" />
-                </g>
-            </svg>
-            <div class="absolute inset-x-8 -bottom-2 h-2 rounded-full bg-black/60 blur-xl"></div>
+            <div class="grid grid-cols-2 gap-4">
+                {#each showcase as item}
+                    <a
+                        class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition-all duration-500 will-change-transform hover:-translate-y-2 hover:border-white/20 hover:bg-white/8 hover:shadow-[0_0_80px_rgba(124,58,237,0.15)]"
+                        href={item.href}
+                        target={item.href ? '_blank' : undefined}
+                        rel={item.href ? 'noreferrer' : undefined}
+                        aria-label={item.title}
+                    >
+                        <div class="absolute -inset-20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style="background: radial-gradient(45% 45% at 50% 50%, rgba(99,102,241,0.25), rgba(0,0,0,0));"></div>
+                        <div class="relative z-10 flex h-28 items-center justify-center">
+                            <span class={`${item.icon} h-10 w-10 text-neutral-200`}></span>
+                        </div>
+                        <div class="relative z-10">
+                            <div class="text-sm font-medium">{item.title}</div>
+                            <div class="text-xs text-neutral-400">{item.hint}</div>
+                        </div>
+                    </a>
+                {/each}
+            </div>
         </div>
     </section>
 
+    <!-- Interests first -->
     <section class="mt-24 grid gap-6 md:grid-cols-3">
+        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
+            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide-bike h-5 w-5"></span>Motorcycles</h3>
+            <p class="mt-2 text-sm text-neutral-300">Riding keeps me focused and present. Road, weather, line—no distractions.</p>
+        </div>
+        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(16,185,129,0.25)]">
+            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide-server h-5 w-5"></span>Homelab</h3>
+            <p class="mt-2 text-sm text-neutral-300">Small server, many services. Docker, IaC, and lots of logs.</p>
+            <a class="mt-3 inline-flex items-center gap-1 text-sm text-indigo-300 hover:text-indigo-200" href="https://github.com/jackra1n/infra" target="_blank" rel="noreferrer"><span>Explore infra</span><span class="i-lucide-arrow-right h-4 w-4"></span></a>
+        </div>
+        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.25)]">
+            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide-code-2 h-5 w-5"></span>Building</h3>
+            <p class="mt-2 text-sm text-neutral-300">Minimal tools and clean code. Lately: Rust for fast utilities.</p>
+        </div>
+    </section>
+
+    <!-- Then what I do professionally -->
+    <section class="mt-10 grid gap-6 md:grid-cols-3">
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur">
             <h3 class="text-lg font-medium">What I work with</h3>
-            <p class="mt-2 text-sm text-neutral-300">Java at work (JSF/PrimeFaces, Maven), Docker across projects, and Linux everywhere. Recently exploring Rust for systems and tooling.</p>
+            <p class="mt-2 text-sm text-neutral-300">Enterprise Java at work (JSF/PrimeFaces, Maven), Docker across projects, and Linux everywhere.</p>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur">
-            <h3 class="text-lg font-medium">Homelab</h3>
-            <p class="mt-2 text-sm text-neutral-300">I run services on a small home server with Docker and IaC. Infra is open-source.</p>
-            <a class="mt-3 inline-block text-sm text-indigo-300 hover:text-indigo-200" href="https://github.com/jackra1n/infra" target="_blank" rel="noreferrer">Explore infra →</a>
+            <h3 class="text-lg font-medium">Currently</h3>
+            <p class="mt-2 text-sm text-neutral-300">Two years into B.Sc. at HSLU, one to go. Building things alongside.</p>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur">
-            <h3 class="text-lg font-medium">Outside the screen</h3>
-            <p class="mt-2 text-sm text-neutral-300">I ride a motorcycle. It keeps me honest about speed and focus.</p>
+            <h3 class="text-lg font-medium">Tech I like</h3>
+            <div class="mt-3 flex flex-wrap gap-2">
+                {#each ['Rust', 'Python', 'Docker', 'Svelte', 'Linux'] as t}
+                    <span class="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-neutral-200 transition-colors hover:bg-white/8">{t}</span>
+                {/each}
+            </div>
         </div>
     </section>
 

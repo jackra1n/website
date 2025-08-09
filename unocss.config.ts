@@ -1,7 +1,6 @@
-import { defineConfig, presetUno, presetTypography, presetIcons, presetWebFonts } from 'unocss';
+import { defineConfig, presetTypography, presetIcons, presetWebFonts, presetWind4 } from 'unocss';
 
 export default defineConfig({
-    dark: 'class',
     shortcuts: {
         container: 'max-w-7xl mx-auto'
     },
@@ -11,7 +10,7 @@ export default defineConfig({
         }
     },
     presets: [
-        presetUno(),
+        presetWind4(),
         presetTypography(),
         presetIcons(),
         presetWebFonts({
