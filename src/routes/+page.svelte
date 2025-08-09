@@ -13,6 +13,35 @@
 
     const skillsPrimary = ['Rust', 'Python', 'Svelte', 'Docker', 'Linux'];
 
+    // Title typing effect
+    const titleSegments = [
+        { text: 'Computer science student and ', key: 'pre' },
+        { text: 'builder', key: 'builder' }
+    ];
+    const totalTitleChars = titleSegments.reduce((n, s) => n + s.text.length, 0);
+    let typedChars = 0;
+    let highlightActive = false;
+
+    onMount(() => {
+        typedChars = 0;
+        highlightActive = false;
+        const interval = setInterval(() => {
+            typedChars += 1;
+            if (typedChars >= totalTitleChars) {
+                clearInterval(interval);
+                setTimeout(() => (highlightActive = true), 350);
+            }
+        }, 28);
+    });
+
+    function typedFor(index: number): string {
+        let remain = typedChars;
+        for (let i = 0; i < index; i += 1) remain -= titleSegments[i].text.length;
+        if (remain <= 0) return '';
+        const part = titleSegments[index].text;
+        return part.slice(0, Math.min(remain, part.length));
+    }
+
     const showcase = [
         {
             title: 'Infra',
@@ -43,8 +72,8 @@
 
 <!-- Background gradient orbs -->
 <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-    <div class="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl animate-[float_18s_ease-in-out_infinite]"></div>
-    <div class="absolute -bottom-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-indigo-500/15 blur-3xl animate-[float_22s_ease-in-out_infinite_reverse]"></div>
+    <div class="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl float-orb"></div>
+    <div class="absolute -bottom-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-indigo-500/15 blur-3xl float-orb-rev"></div>
 </div>
 
 <main class="container mx-auto px-5 md:px-8 py-20">
@@ -60,17 +89,18 @@
         </nav>
     </header>
 
-    <section class="mt-20 grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]">
+    <section class="mt-20 grid items-center gap-10 md:grid-cols-2">
         <div class={`transition-all duration-700 ease-out delay-100 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-            <h1 class="text-4xl md:text-6xl font-semibold leading-[1.05]">
-                Computer science student and <span class="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400">builder</span>.
+            <h1 class={`title-caret ${typedChars < totalTitleChars ? 'show-caret' : ''} text-4xl md:text-6xl font-semibold leading-[1.05]`}>
+                <span>{typedFor(0)}</span>
+                <span class={`${highlightActive ? 'text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400 transition-colors duration-700' : ''}`}>{typedFor(1)}</span>
             </h1>
             <p class="mt-5 text-neutral-300 max-w-2xl">
                 I solve problems with code and ship solid things. Trained in Switzerland, experience with enterprise Java, and finishing my B.Sc. at HSLU. I like backend, infrastructure, and minimal UIs.
             </p>
             <div class="mt-8 flex flex-wrap gap-3">
-                {#each skillsPrimary as s}
-                    <span class="rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-sm text-neutral-200">{s}</span>
+                {#each skillsPrimary as s, i}
+                    <span class="chip-in rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-sm text-neutral-200 will-change-transform" style={`animation-delay: ${i * 80}ms`}>{s}</span>
                 {/each}
             </div>
             
@@ -133,15 +163,42 @@
 
     <footer class={`mt-24 flex items-center justify-between border-t border-white/5 pt-8 text-xs text-neutral-400 transition-all duration-700 ease-out delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <span>© {new Date().getFullYear()} jackra1n</span>
-        <a href="https://github.com/jackra1n/jackra1n.github.io" target="_blank" rel="noreferrer" class="hover:text-white">Source</a>
+        <a href="https://github.com/jackra1n/website" target="_blank" rel="noreferrer" class="hover:text-white">Source</a>
     </footer>
 </main>
 
 <style>
+    .title-caret::after {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 1em;
+        background: currentColor;
+        margin-left: 2px;
+        vertical-align: -0.1em;
+        animation: caret 1s steps(1, end) infinite;
+        opacity: 0.7;
+    }
+    .title-caret:not(.show-caret)::after { display: none; }
+    @keyframes caret {
+        0%, 49% { opacity: 0.0; }
+        50%, 100% { opacity: 1; }
+    }
+
+    @keyframes chipFallIn {
+        0% { transform: translateY(-12px) scale(0.98); opacity: 0; }
+        60% { transform: translateY(6px) scale(1.02); opacity: 1; }
+        100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .chip-in {
+        animation: chipFallIn 480ms cubic-bezier(.2,.9,.2,1) both;
+    }
     @keyframes float {
         0%, 100% { transform: translateY(0px); }
         50% { transform: translateY(-12px); }
     }
+    .float-orb { animation: float 18s ease-in-out infinite; }
+    .float-orb-rev { animation: float 22s ease-in-out infinite reverse; }
     @keyframes idle {
         0%, 100% { transform: translateY(0px) rotate(0deg); }
         50% { transform: translateY(-2px) rotate(-0.5deg); }
