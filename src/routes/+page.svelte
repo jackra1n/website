@@ -1,4 +1,11 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
+
+    let mounted = false;
+    onMount(() => {
+        mounted = true;
+    });
+
     const links = [{ label: 'GitHub', href: 'https://github.com/jackra1n' }];
 
     const skillsPrimary = ['Java', 'JSF', 'PrimeFaces', 'Maven', 'Docker'];
@@ -39,7 +46,7 @@
 </div>
 
 <main class="container mx-auto px-5 md:px-8 py-20">
-    <header class="flex items-center justify-between">
+    <header class={`flex items-center justify-between transition-all duration-700 ease-out ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}>
         <a href="/" class="text-xl md:text-2xl font-semibold tracking-tight">jackra1n</a>
         <nav class="flex items-center gap-5 text-sm text-neutral-300">
             {#each links as link}
@@ -52,7 +59,7 @@
     </header>
 
     <section class="mt-20 grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]">
-        <div>
+        <div class={`transition-all duration-700 ease-out delay-100 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
             <h1 class="text-4xl md:text-6xl font-semibold leading-[1.05]">
                 Computer science student and builder.
             </h1>
@@ -78,7 +85,7 @@
         </div>
 
         <!-- Showcase grid (icons/images placeholders with glow + float on hover) -->
-        <div class="relative mx-auto w-full max-w-md select-none">
+        <div class={`relative mx-auto w-full max-w-md select-none transition-all duration-700 ease-out delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
             <div class="grid grid-cols-2 gap-4">
                 {#each showcase as item}
                     <a
@@ -103,7 +110,7 @@
     </section>
 
     <!-- Interests first -->
-    <section class="mt-24 grid gap-6 md:grid-cols-3">
+    <section class={`mt-24 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
             <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:bike h-5 w-5"></span>Motorcycles</h3>
             <p class="mt-2 text-sm text-neutral-300">Riding keeps me focused and present. Road, weather, line—no distractions.</p>
@@ -120,7 +127,7 @@
     </section>
 
     <!-- Then what I do professionally -->
-    <section class="mt-10 grid gap-6 md:grid-cols-3">
+    <section class={`mt-10 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur">
             <h3 class="text-lg font-medium">What I work with</h3>
             <p class="mt-2 text-sm text-neutral-300">Enterprise Java at work (JSF/PrimeFaces, Maven), Docker across projects, and Linux everywhere.</p>
@@ -139,7 +146,7 @@
         </div>
     </section>
 
-    <footer class="mt-24 flex items-center justify-between border-t border-white/5 pt-8 text-xs text-neutral-400">
+    <footer class={`mt-24 flex items-center justify-between border-t border-white/5 pt-8 text-xs text-neutral-400 transition-all duration-700 ease-out delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <span>© {new Date().getFullYear()} jackra1n</span>
         <a href="https://github.com/jackra1n/jackra1n.github.io" target="_blank" rel="noreferrer" class="hover:text-white">Source</a>
     </footer>
