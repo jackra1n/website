@@ -9,31 +9,31 @@
     const links = [{ label: 'GitHub', href: 'https://github.com/jackra1n' }];
 
     const skillsPrimary = ['Java', 'JSF', 'PrimeFaces', 'Maven', 'Docker'];
-    const skillsSecondary = ['Python', 'Rust', 'Svelte', 'Linux', 'Homelab'];
+    const skillsSecondary = ['Rust', 'Python', 'Linux', 'Homelab', 'Svelte'];
 
     const showcase = [
         {
-            title: 'Motorcycle',
-            icon: 'i-lucide:bike',
-            hint: 'A ride clears the cache',
-            href: undefined
-        },
-        {
             title: 'Homelab',
             icon: 'i-lucide:server',
-            hint: 'Docker containers everywhere',
+            hint: 'Docker + IaC',
             href: 'https://github.com/jackra1n/infra'
         },
         {
             title: 'Rust',
-            icon: 'i-lucide:cog',
-            hint: 'Fast tools and CLIs',
+            icon: 'i-simple-icons:rust',
+            hint: 'Fast tools & CLIs',
             href: undefined
         },
         {
             title: 'Python',
-            icon: 'i-lucide:terminal',
-            hint: 'Data + scripting',
+            icon: 'i-simple-icons:python',
+            hint: 'Automation & tooling',
+            href: undefined
+        },
+        {
+            title: 'Svelte',
+            icon: 'i-simple-icons:svelte',
+            hint: 'Minimal UIs',
             href: undefined
         }
     ];
@@ -109,37 +109,37 @@
         </div>
     </section>
 
-    <!-- Interests first -->
+    <!-- About + stack -->
     <section class={`mt-24 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
-            <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:bike h-5 w-5"></span>Motorcycles</h3>
-            <p class="mt-2 text-sm text-neutral-300">Riding keeps me focused and present. Road, weather, line—no distractions.</p>
+            <h3 class="text-lg font-medium">About</h3>
+            <p class="mt-2 text-sm text-neutral-300">Apprenticeship-trained developer, now finishing B.Sc. at HSLU. I value clarity, reliability, and minimal design. Outside of code I lift — bodybuilding keeps my routine and discipline sharp.</p>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(16,185,129,0.25)]">
             <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:server h-5 w-5"></span>Homelab</h3>
-            <p class="mt-2 text-sm text-neutral-300">Small server, many services. Docker, IaC, and lots of logs.</p>
+            <p class="mt-2 text-sm text-neutral-300">I run a small server with Docker and IaC for personal services.</p>
             <a class="mt-3 inline-flex items-center gap-1 text-sm text-indigo-300 hover:text-indigo-200" href="https://github.com/jackra1n/infra" target="_blank" rel="noreferrer"><span>Explore infra</span><span class="i-lucide:arrow-right h-4 w-4"></span></a>
         </div>
         <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.25)]">
             <h3 class="text-lg font-medium inline-flex items-center gap-2"><span class="i-lucide:code-2 h-5 w-5"></span>Building</h3>
-            <p class="mt-2 text-sm text-neutral-300">Minimal tools and clean code. Lately: Rust for fast utilities.</p>
+            <p class="mt-2 text-sm text-neutral-300">Minimal tools and clean code. Recently more Rust for fast utilities.</p>
         </div>
     </section>
 
     <!-- Then what I do professionally -->
     <section class={`mt-10 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-400 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur">
+        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
             <h3 class="text-lg font-medium">What I work with</h3>
             <p class="mt-2 text-sm text-neutral-300">Enterprise Java at work (JSF/PrimeFaces, Maven), Docker across projects, and Linux everywhere.</p>
         </div>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur">
+        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(16,185,129,0.25)]">
             <h3 class="text-lg font-medium">Currently</h3>
             <p class="mt-2 text-sm text-neutral-300">Two years into B.Sc. at HSLU, one to go. Building things alongside.</p>
         </div>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur">
+        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.25)]">
             <h3 class="text-lg font-medium">Tech I like</h3>
             <div class="mt-3 flex flex-wrap gap-2">
-                {#each ['Rust', 'Python', 'Docker', 'Svelte', 'Linux'] as t}
+                {#each ['Rust', 'Python', 'Docker', 'Linux', 'Svelte'] as t}
                     <span class="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs text-neutral-200 transition-colors hover:bg-white/8">{t}</span>
                 {/each}
             </div>
