@@ -6,16 +6,11 @@
         mounted = true;
     });
 
-    const links = [
-        { label: 'GitHub', href: 'https://github.com/jackra1n', icon: 'i-simple-icons:github' },
-        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jacek-lajdecki/', icon: 'i-simple-icons:linkedin' }
-    ];
-
     const skillsPrimary = ['Rust', 'Python', 'Svelte', 'Docker', 'Linux'];
 
     // Title typing effect
     const titleSegments = [
-        { text: 'Computer science student and ', key: 'pre' },
+        { text: 'Software developer and ', key: 'pre' },
         { text: 'builder', key: 'builder' }
     ];
     const totalTitleChars = titleSegments.reduce((n, s) => n + s.text.length, 0);
@@ -67,6 +62,11 @@
             hint: 'Minimal interfaces',
             href: undefined
         }
+    ];
+
+    const links = [
+        { label: 'GitHub', href: 'https://github.com/jackra1n', icon: 'i-simple-icons:github' },
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jacek-lajdecki/', icon: 'i-simple-icons:linkedin' }
     ];
 </script>
 
