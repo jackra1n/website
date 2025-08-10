@@ -70,8 +70,8 @@
     ];
 </script>
 
-<!-- Background gradient orbs -->
-<div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+<!-- Background gradient orbs (extend beyond viewport to avoid clipping on mobile) -->
+<div class="pointer-events-none fixed -inset-[12%] md:inset-0 -z-10 overflow-visible md:overflow-hidden">
     <div class="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl float-orb"></div>
     <div class="absolute -bottom-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-indigo-500/15 blur-3xl float-orb-rev"></div>
 </div>
