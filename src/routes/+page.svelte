@@ -41,26 +41,22 @@
         {
             title: 'Infra',
             icon: 'i-lucide:server',
-            hint: 'Docker + IaC',
-            href: 'https://github.com/jackra1n/infra'
+            hint: 'Docker + IaC'
         },
         {
             title: 'CLIs',
             icon: 'i-lucide:terminal',
-            hint: 'Fast tools',
-            href: undefined
+            hint: 'Fast tools'
         },
         {
             title: 'Automation',
             icon: 'i-lucide:cog',
-            hint: 'Cut manual work',
-            href: undefined
+            hint: 'Cut manual work'
         },
         {
             title: 'UI',
             icon: 'i-lucide:layout-template',
-            hint: 'Minimal interfaces',
-            href: undefined
+            hint: 'Minimal interfaces'
         }
     ];
 
@@ -120,11 +116,8 @@
         <div class={`relative mx-auto w-full max-w-md select-none transition-all duration-700 ease-out delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
             <div class="grid grid-cols-2 gap-4">
                 {#each showcase as item}
-                    <a
+                    <div
                         class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition-all duration-500 will-change-transform hover:-translate-y-2 hover:border-white/20 hover:bg-white/8 hover:shadow-[0_0_80px_rgba(124,58,237,0.15)]"
-                        href={item.href}
-                        target={item.href ? '_blank' : undefined}
-                        rel={item.href ? 'noreferrer' : undefined}
                         aria-label={item.title}
                     >
                         <div class="absolute -inset-20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style="background: radial-gradient(45% 45% at 50% 50%, rgba(99,102,241,0.25), rgba(0,0,0,0));"></div>
@@ -137,7 +130,7 @@
                                 <div class="text-xs text-neutral-400">{item.hint}</div>
                             {/if}
                         </div>
-                    </a>
+                    </div>
                 {/each}
             </div>
         </div>
