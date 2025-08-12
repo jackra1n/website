@@ -7,7 +7,7 @@
 
 <svelte:head>
     <meta name="theme-color" content="#0a0a0a" />
-    <meta name="title" content="jackra1n - Software Engineer" />
+    <title>jackra1n - Software Engineer</title>
     <meta name="description" content="Hey, I'm Jacek. I build software and small tools. I like open source, Rust, Svelte and clean design." />
     <link rel="canonical" href="https://jackra1n.com" />
     <meta property="og:type" content="website" />
