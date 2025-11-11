@@ -61,8 +61,7 @@
     ];
 
     const links = [
-        { label: 'GitHub', href: 'https://github.com/jackra1n', icon: 'i-simple-icons:github' },
-        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/jacek-la/', icon: 'i-simple-icons:linkedin' }
+        { label: 'GitHub', href: 'https://github.com/jackra1n', icon: 'i-simple-icons:github' }
     ];
 </script>
 
