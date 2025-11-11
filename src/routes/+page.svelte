@@ -2,22 +2,28 @@
     import { onMount } from 'svelte';
 
     let mounted = false;
-    onMount(() => {
-        mounted = true;
-    });
-
+    let emailHref = '#';
+    
+    function decodeEmail(): string {
+        const parts = ['hi', '@', 'jackra1n', '.', 'com'];
+        return 'mailto:' + parts.join('');
+    }
+    
     const skillsPrimary = ['Rust', 'Python', 'Svelte', 'Docker', 'Linux'];
 
-    // Title typing effect
     const titleSegments = [
         { text: 'Software developer and ', key: 'pre' },
         { text: 'builder', key: 'builder' }
     ];
+
     const totalTitleChars = titleSegments.reduce((n, s) => n + s.text.length, 0);
     let typedChars = 0;
     let highlightActive = false;
 
     onMount(() => {
+        mounted = true;
+        emailHref = decodeEmail();
+        
         typedChars = 0;
         highlightActive = false;
         const interval = setInterval(() => {
@@ -104,7 +110,7 @@
                     <span class="i-simple-icons:github h-4 w-4" aria-hidden="true"></span>
                     View GitHub
                 </a>
-                <a href="mailto:hi@jackra1n.com" class="inline-flex items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white hover:border-white/20 transition-colors">
+                <a href={emailHref} class="inline-flex items-center gap-2 rounded-md border border-white/10 px-4 py-2 text-sm font-medium text-neutral-200 hover:text-white hover:border-white/20 transition-colors">
                     <span class="i-lucide:mail h-4 w-4" aria-hidden="true"></span>
                     Email
                 </a>
