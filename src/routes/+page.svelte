@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import AsciiBackground from '$lib/AsciiBackground.svelte';
+    import Ascii from '$lib/Ascii.svelte';
 
     let mounted = false;
     let emailHref = '#';
@@ -70,11 +70,10 @@
     const links = [{ label: 'GitHub', href: 'https://github.com/jackra1n', icon: 'i-simple-icons:github' }];
 </script>
 
-<AsciiBackground src="/ascii/wave.json" />
-
-<!-- single faint accent glow for warmth over the monochrome wave -->
+<!-- faint accent glows for depth -->
 <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-    <div class="absolute -top-32 left-1/4 h-[28rem] w-[28rem] rounded-full bg-indigo-500/8 blur-3xl float-orb"></div>
+    <div class="absolute -top-32 left-1/4 h-[28rem] w-[28rem] rounded-full bg-indigo-500/10 blur-3xl float-orb"></div>
+    <div class="absolute bottom-0 right-1/4 h-[24rem] w-[24rem] rounded-full bg-fuchsia-500/8 blur-3xl float-orb-rev"></div>
 </div>
 
 <main class="container mx-auto px-5 md:px-8 py-16 md:py-20">
@@ -142,17 +141,22 @@
         </div>
     </section>
 
-    <!-- About + work -->
-    <section class={`mt-24 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-        {#each cards as card}
-            <div class="rounded-xl border border-white/5 bg-neutral-950/40 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-neutral-950/60 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
-                <h3 class="font-mono text-sm text-fuchsia-400/70">{card.label}</h3>
-                <p class="mt-3 text-sm text-neutral-300">{card.body}</p>
-            </div>
-        {/each}
+    <!-- About + work, with the ASCII planet drifting behind the cards -->
+    <section class="relative py-24 md:py-36">
+        <div class="absolute inset-0 -z-0 overflow-hidden">
+            <Ascii src="/ascii/planet.json" mode="contain" color="rgb(199 210 254 / 0.5)" />
+        </div>
+        <div class={`relative z-10 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+            {#each cards as card}
+                <div class="rounded-xl border border-white/5 bg-neutral-950/40 p-6 backdrop-blur-md transition-all hover:border-white/10 hover:bg-neutral-950/60 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
+                    <h3 class="font-mono text-sm text-fuchsia-400/70">{card.label}</h3>
+                    <p class="mt-3 text-sm text-neutral-300">{card.body}</p>
+                </div>
+            {/each}
+        </div>
     </section>
 
-    <footer class={`mt-24 flex items-center justify-between border-t border-white/5 pt-8 font-mono text-xs text-neutral-500 transition-all duration-700 ease-out delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+    <footer class={`mt-20 flex items-center justify-between border-t border-white/5 pt-8 font-mono text-xs text-neutral-500 transition-all duration-700 ease-out delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <span>© {new Date().getFullYear()} jackra1n</span>
         <a href="https://github.com/jackra1n/website" target="_blank" rel="noreferrer" class="hover:text-white">$ git clone</a>
     </footer>
@@ -198,8 +202,9 @@
         50% { transform: translateY(-12px); }
     }
     .float-orb { animation: float 18s ease-in-out infinite; }
+    .float-orb-rev { animation: float 22s ease-in-out infinite reverse; }
 
     @media (prefers-reduced-motion: reduce) {
-        .title-caret::after, .term-cursor, .float-orb, .chip-in { animation: none; }
+        .title-caret::after, .term-cursor, .float-orb, .float-orb-rev, .chip-in { animation: none; }
     }
 </style>
