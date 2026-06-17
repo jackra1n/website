@@ -1,14 +1,15 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+    import AsciiBackground from '$lib/AsciiBackground.svelte';
 
     let mounted = false;
     let emailHref = '#';
-    
+
     function decodeEmail(): string {
         const parts = ['hi', '@', 'jackra1n', '.', 'com'];
         return 'mailto:' + parts.join('');
     }
-    
+
     const skillsPrimary = ['Rust', 'Python', 'Svelte', 'Docker', 'Linux'];
 
     const titleSegments = [
@@ -23,7 +24,7 @@
     onMount(() => {
         mounted = true;
         emailHref = decodeEmail();
-        
+
         typedChars = 0;
         highlightActive = false;
         const interval = setInterval(() => {
@@ -33,6 +34,7 @@
                 setTimeout(() => (highlightActive = true), 350);
             }
         }, 28);
+        return () => clearInterval(interval);
     });
 
     function typedFor(index: number): string {
@@ -43,44 +45,44 @@
         return part.slice(0, Math.min(remain, part.length));
     }
 
-    const showcase = [
+    // Faux terminal session shown in the hero — real info, on-brand presentation.
+    const session = [
+        { cmd: 'whoami', out: ['jacek — software developer & builder'] },
+        { cmd: 'cat stack.txt', out: ['backend · infrastructure · pretty UIs'] },
+        { cmd: 'ls ~/now', out: ['hslu-bsc/   rust/   svelte/   small-tools/'] }
+    ];
+
+    const cards = [
         {
-            title: 'Infra',
-            icon: 'i-lucide:server',
-            hint: 'Docker + IaC'
+            label: '// about',
+            body: 'Trained in Switzerland, finishing a B.Sc. at HSLU. I value clarity, reliability and minimal design. Outside code I lift — bodybuilding keeps the routine sharp.'
         },
         {
-            title: 'CLIs',
-            icon: 'i-lucide:terminal',
-            hint: 'Fast tools'
+            label: '// stack',
+            body: 'Enterprise Java (JSF/PrimeFaces, Maven) and Docker in production. Comfortable across the stack, happiest in the backend.'
         },
         {
-            title: 'Automation',
-            icon: 'i-lucide:cog',
-            hint: 'Cut manual work'
-        },
-        {
-            title: 'UI',
-            icon: 'i-lucide:layout-template',
-            hint: 'Minimal interfaces'
+            label: '// now',
+            body: 'Final year of the B.Sc. at HSLU. Getting sharper at Rust and frontend with Svelte, shipping small tools along the way.'
         }
     ];
 
-    const links = [
-        { label: 'GitHub', href: 'https://github.com/jackra1n', icon: 'i-simple-icons:github' }
-    ];
+    const links = [{ label: 'GitHub', href: 'https://github.com/jackra1n', icon: 'i-simple-icons:github' }];
 </script>
 
-<!-- Background gradient orbs (extend beyond viewport to avoid clipping on mobile) -->
-<div class="pointer-events-none fixed -inset-[12%] md:inset-0 -z-10 overflow-visible md:overflow-hidden">
-    <div class="absolute -top-40 -left-32 h-96 w-96 rounded-full bg-fuchsia-500/20 blur-3xl float-orb"></div>
-    <div class="absolute -bottom-32 -right-24 h-[28rem] w-[28rem] rounded-full bg-indigo-500/15 blur-3xl float-orb-rev"></div>
+<AsciiBackground src="/ascii/wave.json" />
+
+<!-- single faint accent glow for warmth over the monochrome wave -->
+<div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute -top-32 left-1/4 h-[28rem] w-[28rem] rounded-full bg-indigo-500/8 blur-3xl float-orb"></div>
 </div>
 
-<main class="container mx-auto px-5 md:px-8 py-20">
+<main class="container mx-auto px-5 md:px-8 py-16 md:py-20">
     <header class={`flex items-center justify-between transition-all duration-700 ease-out ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}>
-        <a href="/" class="text-xl md:text-2xl font-semibold tracking-tight">jackra1n</a>
-        <nav class="flex items-center gap-5 text-sm text-neutral-300">
+        <a href="/" class="font-mono text-lg md:text-xl font-semibold tracking-tight">
+            <span class="text-neutral-500">~/</span><span>jackra1n</span>
+        </a>
+        <nav class="flex items-center gap-5 font-mono text-sm text-neutral-400">
             {#each links as link}
                 <a class="inline-flex items-center gap-2 hover:text-white transition-colors" href={link.href} target="_blank" rel="noreferrer" aria-label={link.label}>
                     <span class={`${link.icon} h-4 w-4`} aria-hidden="true"></span>
@@ -90,21 +92,22 @@
         </nav>
     </header>
 
-    <section class="mt-20 grid items-center gap-10 md:grid-cols-2">
+    <section class="mt-16 md:mt-24 grid items-center gap-12 md:grid-cols-2">
         <div class={`transition-all duration-700 ease-out delay-100 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+            <p class="font-mono text-sm text-fuchsia-400/80 mb-4">$ ./hello.sh</p>
             <h1 class={`title-caret ${typedChars < totalTitleChars ? 'show-caret' : ''} text-4xl md:text-6xl font-semibold leading-[1.05]`}>
                 <span>{typedFor(0)}</span>
                 <span class={`${highlightActive ? 'text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-400 via-purple-400 to-indigo-400 transition-colors duration-700' : ''}`}>{typedFor(1)}</span>
             </h1>
             <p class="mt-5 text-neutral-300 max-w-2xl">
-                I solve problems with code and ship solid things. Trained in Switzerland, experience with enterprise Java, and finishing my B.Sc. at HSLU. I like backend, infrastructure, and minimal UIs.
+                I solve problems with code and ship solid things. Trained in Switzerland, experience with enterprise Java, and finishing my B.Sc. at HSLU. I like backend, infrastructure, and pretty UIs.
             </p>
-            <div class="mt-8 flex flex-wrap gap-3">
+            <div class="mt-8 flex flex-wrap gap-2.5">
                 {#each skillsPrimary as s, i}
-                    <span class="chip-in rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-sm text-neutral-200 will-change-transform" style={`animation-delay: ${i * 80}ms`}>{s}</span>
+                    <span class="chip-in font-mono rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-sm text-neutral-200 will-change-transform" style={`animation-delay: ${i * 80}ms`}>{s}</span>
                 {/each}
             </div>
-            
+
             <div class="mt-10 flex gap-4">
                 <a href="https://github.com/jackra1n" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15 transition-colors">
                     <span class="i-simple-icons:github h-4 w-4" aria-hidden="true"></span>
@@ -117,51 +120,41 @@
             </div>
         </div>
 
-        <!-- Showcase grid (icons/images placeholders with glow + float on hover) -->
-        <div class={`relative mx-auto w-full max-w-md select-none transition-all duration-700 ease-out delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-            <div class="grid grid-cols-2 gap-4">
-                {#each showcase as item}
-                    <div
-                        class="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition-all duration-500 will-change-transform hover:-translate-y-2 hover:border-white/20 hover:bg-white/8 hover:shadow-[0_0_80px_rgba(124,58,237,0.15)]"
-                        aria-label={item.title}
-                    >
-                        <div class="absolute -inset-20 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" style="background: radial-gradient(45% 45% at 50% 50%, rgba(99,102,241,0.25), rgba(0,0,0,0));"></div>
-                        <div class="relative z-10 flex h-28 items-center justify-center">
-                            <span class={`${item.icon} h-10 w-10 text-neutral-200`}></span>
-                        </div>
-                        <div class="relative z-10">
-                            <div class="text-sm font-medium">{item.title}</div>
-                            {#if item.hint}
-                                <div class="text-xs text-neutral-400">{item.hint}</div>
-                            {/if}
-                        </div>
-                    </div>
-                {/each}
+        <!-- Terminal window: real info, on-brand presentation -->
+        <div class={`relative mx-auto w-full max-w-md transition-all duration-700 ease-out delay-200 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+            <div class="overflow-hidden rounded-xl border border-white/10 bg-neutral-950/70 backdrop-blur shadow-[0_20px_70px_-20px_rgba(99,102,241,0.35)]">
+                <div class="flex items-center gap-2 border-b border-white/10 bg-white/5 px-4 py-2.5">
+                    <span class="h-3 w-3 rounded-full bg-red-400/70"></span>
+                    <span class="h-3 w-3 rounded-full bg-yellow-400/70"></span>
+                    <span class="h-3 w-3 rounded-full bg-green-400/70"></span>
+                    <span class="ml-2 font-mono text-xs text-neutral-500">jackra1n@web: ~</span>
+                </div>
+                <div class="p-4 font-mono text-[13px] leading-relaxed">
+                    {#each session as line}
+                        <p class="text-neutral-200"><span class="text-fuchsia-400/80">$</span> {line.cmd}</p>
+                        {#each line.out as o}
+                            <p class="text-neutral-400">{o}</p>
+                        {/each}
+                    {/each}
+                    <p class="text-neutral-200"><span class="text-fuchsia-400/80">$</span> <span class="term-cursor"></span></p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- About + work -->
     <section class={`mt-24 grid gap-6 md:grid-cols-3 transition-all duration-700 ease-out delay-300 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
-            <h3 class="text-lg font-medium">About</h3>
-            <p class="mt-2 text-sm text-neutral-300">Trained in Switzerland, finishing a B.Sc. at HSLU. I value clarity, reliability and minimal design. Outside code I lift; bodybuilding keeps the routine sharp.</p>
-        </div>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(16,185,129,0.25)]">
-            <h3 class="text-lg font-medium">What I work with</h3>
-            <p class="mt-2 text-sm text-neutral-300">Enterprise Java (JSF/PrimeFaces, Maven) and Docker in production.</p>
-        </div>
-        <div class="rounded-xl border border-white/5 bg-white/5 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-white/7 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(59,130,246,0.25)]">
-            <h3 class="text-lg font-medium">Currently</h3>
-            <p class="mt-2 text-sm text-neutral-300">Final year of the B.Sc. at HSLU. Getting better at Rust and frontend with Svelte, while shipping small tools.</p>
-        </div>
+        {#each cards as card}
+            <div class="rounded-xl border border-white/5 bg-neutral-950/40 p-6 backdrop-blur transition-all hover:border-white/10 hover:bg-neutral-950/60 hover:-translate-y-1.5 hover:shadow-[0_10px_40px_-10px_rgba(99,102,241,0.25)]">
+                <h3 class="font-mono text-sm text-fuchsia-400/70">{card.label}</h3>
+                <p class="mt-3 text-sm text-neutral-300">{card.body}</p>
+            </div>
+        {/each}
     </section>
 
-    <!-- Space intentionally left for future projects or posts -->
-
-    <footer class={`mt-24 flex items-center justify-between border-t border-white/5 pt-8 text-xs text-neutral-400 transition-all duration-700 ease-out delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+    <footer class={`mt-24 flex items-center justify-between border-t border-white/5 pt-8 font-mono text-xs text-neutral-500 transition-all duration-700 ease-out delay-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
         <span>© {new Date().getFullYear()} jackra1n</span>
-        <a href="https://github.com/jackra1n/website" target="_blank" rel="noreferrer" class="hover:text-white">Source</a>
+        <a href="https://github.com/jackra1n/website" target="_blank" rel="noreferrer" class="hover:text-white">$ git clone</a>
     </footer>
 </main>
 
@@ -179,8 +172,18 @@
     }
     .title-caret:not(.show-caret)::after { display: none; }
     @keyframes caret {
-        0%, 49% { opacity: 0.0; }
+        0%, 49% { opacity: 0; }
         50%, 100% { opacity: 1; }
+    }
+
+    .term-cursor {
+        display: inline-block;
+        width: 0.55em;
+        height: 1.05em;
+        background: currentColor;
+        vertical-align: -0.18em;
+        opacity: 0.8;
+        animation: caret 1s steps(1, end) infinite;
     }
 
     @keyframes chipFallIn {
@@ -188,17 +191,15 @@
         60% { transform: translateY(6px) scale(1.02); opacity: 1; }
         100% { transform: translateY(0) scale(1); opacity: 1; }
     }
-    .chip-in {
-        animation: chipFallIn 480ms cubic-bezier(.2,.9,.2,1) both;
-    }
+    .chip-in { animation: chipFallIn 480ms cubic-bezier(.2,.9,.2,1) both; }
+
     @keyframes float {
         0%, 100% { transform: translateY(0px); }
         50% { transform: translateY(-12px); }
     }
     .float-orb { animation: float 18s ease-in-out infinite; }
-    .float-orb-rev { animation: float 22s ease-in-out infinite reverse; }
-    @keyframes idle {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-2px) rotate(-0.5deg); }
+
+    @media (prefers-reduced-motion: reduce) {
+        .title-caret::after, .term-cursor, .float-orb, .chip-in { animation: none; }
     }
 </style>
